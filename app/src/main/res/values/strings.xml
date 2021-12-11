@@ -1,3 +1,4 @@
 <resources>
   <string name="app_name">ExoPlayerSample</string>
+  <string name="player_content_tag">Player content tag</string>
 </resources>
