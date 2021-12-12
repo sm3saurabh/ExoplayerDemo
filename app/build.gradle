@@ -77,6 +77,10 @@ dependencies {
   // Exoplayer
   implementation 'com.google.android.exoplayer:exoplayer:2.16.1'
 
+  // Epoxy
+  implementation "com.airbnb.android:epoxy:$epoxy_version"
+  kapt "com.airbnb.android:epoxy-processor:$epoxy_version"
+
 
 
 
