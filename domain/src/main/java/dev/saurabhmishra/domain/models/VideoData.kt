@@ -5,7 +5,7 @@ data class VideoData(
     val videoUrl: String,
     val title: String,
     val views: Long,
-    val likeCount: Int,
-    val dislikeCount: Int,
+    val likeCount: Long,
+    val dislikeCount: Long,
     val uploadedTimeStamp: Long
 )

@@ -15,7 +15,8 @@
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_shade">
+    android:background="@color/black_shade"
+    android:padding="8dp">
 
     <TextView
       android:id="@+id/current_video_title"
@@ -31,10 +32,39 @@
 
     <TextView
       android:id="@+id/current_video_views"
+      app:layout_constraintTop_toBottomOf="@id/current_video_title"
+      app:layout_constraintStart_toStartOf="parent"
+      android:layout_marginTop="20dp"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@{ video.videoData.views }"
+      android:text="@{ video.formatCurrentViews() }"
+      android:textSize="12sp"
+      android:textColor="@color/white"
+      tools:text="3M"
       />
+
+    <TextView
+      android:id="@+id/current_video_time"
+      app:layout_constraintTop_toBottomOf="@id/current_video_title"
+      app:layout_constraintStart_toStartOf="parent"
+      android:layout_marginTop="20dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@{ video.formatTime() }"
+      android:textSize="12sp"
+      android:textColor="@color/white"
+      tools:text="3M"
+      />
+
+    <LinearLayout
+      android:id="@+id/stats_container"
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      >
+
+
+    </LinearLayout>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

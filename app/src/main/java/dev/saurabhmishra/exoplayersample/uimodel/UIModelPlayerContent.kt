@@ -2,6 +2,8 @@ package dev.saurabhmishra.exoplayersample.uimodel
 
 import dev.saurabhmishra.domain.models.Comment
 import dev.saurabhmishra.domain.models.VideoData
+import dev.saurabhmishra.exoplayersample.extensions.formatNumberWithAbbr
+import dev.saurabhmishra.exoplayersample.extensions.formatVideoTime
 
 data class UIModelPlayerContent(
     val videoSuggestions: UIModelVideoSuggestions,
@@ -19,7 +21,19 @@ data class UIModelVideo(
     val videoData: VideoData
 ) {
     fun formatCurrentViews(): String {
-        return videoData.views.toString()
+        return videoData.views.formatNumberWithAbbr().orEmpty()
+    }
+
+    fun formatLikes(): String {
+        return videoData.likeCount.formatNumberWithAbbr().orEmpty()
+    }
+
+    fun formatDislikes(): String {
+        return videoData.dislikeCount.formatNumberWithAbbr().orEmpty()
+    }
+
+    fun formatTime(): String {
+        return videoData.uploadedTimeStamp.formatVideoTime()
     }
 }
 
