@@ -3,10 +3,12 @@ package dev.saurabhmishra.exoplayersample.ui.content
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import dev.saurabhmishra.domain.models.Comment
 import dev.saurabhmishra.exoplayersample.R
 import dev.saurabhmishra.exoplayersample.base.BaseFragment
 import dev.saurabhmishra.exoplayersample.databinding.FragmentPlayerContentBinding
 import dev.saurabhmishra.exoplayersample.extensions.nonNull
+import dev.saurabhmishra.exoplayersample.uimodel.UIModelVideo
 
 // Comments
 // Video suggestions
@@ -33,7 +35,44 @@ class PlayerContentFragment : BaseFragment<PlayerContentViewModel, FragmentPlaye
     }
 
     private fun setupController() {
-        controller = PlayerContentController()
+        controller = PlayerContentController(object : PlayerContentController.EventHandler {
+            override fun onCommentLiked(comment: Comment) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onCommentDisliked(comment: Comment) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onCommentExpanded() {
+                TODO("Not yet implemented")
+            }
+
+            override fun onCommentCollapsed() {
+                TODO("Not yet implemented")
+            }
+
+            override fun onVideoSelected(video: UIModelVideo) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onVideoLiked(currentVideo: UIModelVideo) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onVideoDisliked(currentVideo: UIModelVideo) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onVideoShared(currentVideo: UIModelVideo) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onVideoDownloadRequested(currentVideo: UIModelVideo) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
     private fun setupRecycler() {

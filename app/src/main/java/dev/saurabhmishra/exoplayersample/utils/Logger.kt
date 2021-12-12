@@ -9,7 +9,7 @@ import java.util.regex.Pattern
 object Logger {
 
     private const val MAX_TAG_LENGTH = 23
-    private const val CALL_STACK_INDEX = 4
+    private const val CALL_STACK_INDEX = 3
     private val ANONYMOUS_CLASS = Pattern.compile("(\\$\\d+)+$")
 
     private enum class LogLevel {

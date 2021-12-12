@@ -2,12 +2,18 @@ package dev.saurabhmishra.exoplayersample.ui.content
 
 import com.airbnb.epoxy.TypedEpoxyController
 import dev.saurabhmishra.domain.models.Comment
+import dev.saurabhmishra.exoplayersample.commentContent
+import dev.saurabhmishra.exoplayersample.commentsHeader
+import dev.saurabhmishra.exoplayersample.currentVideoStats
 import dev.saurabhmishra.exoplayersample.uimodel.UIModelPlayerContent
 import dev.saurabhmishra.exoplayersample.uimodel.UIModelVideo
 import dev.saurabhmishra.exoplayersample.uimodel.UIModelVideoComments
 import dev.saurabhmishra.exoplayersample.uimodel.UIModelVideoSuggestions
+import dev.saurabhmishra.exoplayersample.videoItem
 
-class PlayerContentController: TypedEpoxyController<PlayerContentViewState>() {
+class PlayerContentController(
+    private val eventHandler: EventHandler
+): TypedEpoxyController<PlayerContentViewState>() {
 
     interface EventHandler {
         fun onCommentLiked(comment: Comment)
@@ -15,6 +21,10 @@ class PlayerContentController: TypedEpoxyController<PlayerContentViewState>() {
         fun onCommentExpanded()
         fun onCommentCollapsed()
         fun onVideoSelected(video: UIModelVideo)
+        fun onVideoLiked(currentVideo: UIModelVideo)
+        fun onVideoDisliked(currentVideo: UIModelVideo)
+        fun onVideoShared(currentVideo: UIModelVideo)
+        fun onVideoDownloadRequested(currentVideo: UIModelVideo)
     }
 
 
@@ -54,22 +64,64 @@ class PlayerContentController: TypedEpoxyController<PlayerContentViewState>() {
     }
 
     private fun buildLoader() {
-
+        // See if this is actually required
     }
 
     private fun buildVideoSuggestions(videoSuggestions: UIModelVideoSuggestions) {
 
+        videoSuggestions.suggestions.forEach { videoModel ->
+            videoItem {
+                id(videoModel.uniqueId)
+                video(videoModel)
+                videoItemClickListener { _ ->
+                    this@PlayerContentController.eventHandler.onVideoSelected(videoModel)
+                }
+            }
+        }
+
     }
 
     private fun buildCommentsHeader(videoComments: UIModelVideoComments) {
-
+        commentsHeader {
+            comments(videoComments)
+            id(videoComments.uniqueId)
+            commentExpandedClickListener { _ ->
+                this@PlayerContentController.eventHandler.onCommentExpanded()
+            }
+        }
     }
 
     private fun buildExpandedComments(data: UIModelPlayerContent) {
         buildCurrentVideoStats(data.currentVideo)
+
+        data.videoComments.comments.forEach { commentModel ->
+            commentContent {
+                id(commentModel.uniqueId)
+                comment(commentModel)
+            }
+        }
     }
 
     private fun buildCurrentVideoStats(currentVideo: UIModelVideo) {
+        currentVideoStats {
+            id(currentVideo.uniqueId)
+            video(currentVideo)
 
+            dislikesClickListener {_ ->
+                this@PlayerContentController.eventHandler.onVideoDisliked(currentVideo)
+            }
+
+            likesClickListener {_ ->
+                this@PlayerContentController.eventHandler.onVideoLiked(currentVideo)
+            }
+
+            shareClickListener {_ ->
+                this@PlayerContentController.eventHandler.onVideoShared(currentVideo)
+            }
+
+            downloadClickListener {_ ->
+                this@PlayerContentController.eventHandler.onVideoDownloadRequested(currentVideo)
+            }
+        }
     }
 }
