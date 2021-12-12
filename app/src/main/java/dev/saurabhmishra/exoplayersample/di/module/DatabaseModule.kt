@@ -7,6 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import dev.saurabhmishra.exoplayersample.database.ExoplayerSampleDB
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -17,7 +18,7 @@ object DatabaseModule {
     @Provides
     fun provideExoplayerSampleDB(
         @ApplicationContext context: Context
-    ): RoomDatabase {
+    ): ExoplayerSampleDB {
         return ExoplayerSampleDB.create(context)
     }
 }

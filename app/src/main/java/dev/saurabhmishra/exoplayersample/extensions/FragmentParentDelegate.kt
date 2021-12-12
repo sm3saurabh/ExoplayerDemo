@@ -1,4 +1,4 @@
-package dev.saurabhmishra.exoplayersample.utils
+package dev.saurabhmishra.exoplayersample.extensions
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
