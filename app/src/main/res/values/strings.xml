@@ -1,4 +1,6 @@
 <resources>
   <string name="app_name">ExoPlayerSample</string>
   <string name="player_content_tag">Player content tag</string>
+  <string name="label_share">Share</string>
+  <string name="label_download">Download</string>
 </resources>
