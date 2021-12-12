@@ -44,8 +44,8 @@ fun Long.formatVideoTime(): String {
     val today = LocalDate.now()
 
     return when {
-        date.isEqual(today)) -> "Today"
-        date.minusDays(1).isEqual(today)) -> "Yesterday"
+        date.isEqual(today) -> "Today"
+        date.minusDays(1).isEqual(today) -> "Yesterday"
         else -> date.format(DateTimeFormatter.ofPattern("MMM dd, yyyy"))
     }
 }
