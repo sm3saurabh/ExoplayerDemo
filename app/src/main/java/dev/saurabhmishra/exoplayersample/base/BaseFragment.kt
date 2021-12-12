@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-abstract class BaseFragment<VM: ViewModel, VB: ViewDataBinding> : Fragment(), BaseUIComponent<VM, VB> {
+abstract class BaseFragment<VM: BaseViewModel, VB: ViewDataBinding> : Fragment(), BaseUIComponent<VM, VB> {
 
     private var _binding: VB? = null
 

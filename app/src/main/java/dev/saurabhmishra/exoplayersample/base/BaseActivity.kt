@@ -8,7 +8,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-abstract class BaseActivity<VM: ViewModel, VB: ViewDataBinding>: AppCompatActivity(), BaseUIComponent<VM, VB> {
+abstract class BaseActivity<VM: BaseViewModel, VB: ViewDataBinding>: AppCompatActivity(), BaseUIComponent<VM, VB> {
 
     private var _binding: VB? = null
 

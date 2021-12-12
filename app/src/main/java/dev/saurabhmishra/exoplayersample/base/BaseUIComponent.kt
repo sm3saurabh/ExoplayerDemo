@@ -4,7 +4,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 
-interface BaseUIComponent<VM: ViewModel, VB: ViewDataBinding> {
+interface BaseUIComponent<VM: BaseViewModel, VB: ViewDataBinding> {
     val binding: VB
     val viewModel: VM
 
