@@ -10,11 +10,27 @@
       name="video"
       type="dev.saurabhmishra.exoplayersample.uimodel.UIModelVideo" />
 
+    <variable
+      name="likesClickListener"
+      type="android.view.View.OnClickListener" />
+
+    <variable
+      name="dislikesClickListener"
+      type="android.view.View.OnClickListener" />
+
+    <variable
+      name="shareClickListener"
+      type="android.view.View.OnClickListener" />
+
+    <variable
+      name="downloadClickListener"
+      type="android.view.View.OnClickListener" />
+
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/black_shade"
     android:padding="12dp">
 
@@ -75,6 +91,7 @@
         android:textColor="@color/white"
         android:gravity="center"
         android:text="@{ video.formatLikes() }"
+        android:onClick="@{ likesClickListener }"
         android:drawablePadding="4dp"
         tools:text="17k"
         app:drawableTopCompat="@drawable/ic_baseline_thumb_up_24" />
@@ -88,9 +105,10 @@
         android:textColor="@color/white"
         android:gravity="center"
         android:text="@{ video.formatDislikes() }"
+        android:onClick="@{ dislikesClickListener }"
         android:drawablePadding="4dp"
         tools:text="7k"
-        app:drawableTopCompat="@drawable/ic_baseline_thumb_up_24" />
+        app:drawableTopCompat="@drawable/ic_baseline_thumb_down_24" />
 
       <TextView
         android:layout_weight="1"
@@ -102,7 +120,8 @@
         android:gravity="center"
         android:text="@string/label_share"
         android:drawablePadding="4dp"
-        app:drawableTopCompat="@drawable/ic_baseline_thumb_up_24" />
+        android:onClick="@{ shareClickListener }"
+        app:drawableTopCompat="@drawable/ic_baseline_share_24" />
 
       <TextView
         android:layout_weight="1"
@@ -114,7 +133,8 @@
         android:gravity="center"
         android:text="@string/label_download"
         android:drawablePadding="4dp"
-        app:drawableTopCompat="@drawable/ic_baseline_thumb_up_24" />
+        android:onClick="@{ downloadClickListener }"
+        app:drawableTopCompat="@drawable/ic_baseline_arrow_downward_24" />
 
     </LinearLayout>
 
