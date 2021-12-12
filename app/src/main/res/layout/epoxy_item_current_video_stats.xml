@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+
+  <data>
+
+    <variable
+      name="video"
+      type="dev.saurabhmishra.exoplayersample.uimodel.UIModelVideo" />
+
+  </data>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_shade">
+
+    <TextView
+      android:id="@+id/current_video_title"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:layout_constraintTop_toTopOf="parent"
+      android:layout_marginTop="20dp"
+      android:textColor="@color/white"
+      android:textSize="14sp"
+      android:text="@{ video.videoData.title }"
+      tools:text="Spider-man No way home new trailer 3 Wish me luck "
+      />
+
+    <TextView
+      android:id="@+id/current_video_views"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@{ video.videoData.views }"
+      />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dev.saurabhmishra.exoplayersample.R
 import dev.saurabhmishra.exoplayersample.base.BaseFragment
 import dev.saurabhmishra.exoplayersample.databinding.FragmentPlayerContentBinding
-import dev.saurabhmishra.exoplayersample.utils.nonNull
+import dev.saurabhmishra.exoplayersample.extensions.nonNull
 
 // Comments
 // Video suggestions
@@ -45,7 +45,7 @@ class PlayerContentFragment : BaseFragment<PlayerContentViewModel, FragmentPlaye
 
     private fun startObserving() {
         viewModel.viewState.nonNull().observe(viewLifecycleOwner) { viewState ->
-
+            controller.setData(viewState)
         }
     }
 }

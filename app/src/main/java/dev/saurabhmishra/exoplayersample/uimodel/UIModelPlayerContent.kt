@@ -17,7 +17,11 @@ data class UIModelVideoSuggestions(
 data class UIModelVideo(
     val uniqueId: Long,
     val videoData: VideoData
-)
+) {
+    fun formatCurrentViews(): String {
+        return videoData.views.toString()
+    }
+}
 
 data class UIModelVideoComments(
     val comments: List<Comment>,

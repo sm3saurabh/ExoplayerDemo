@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.saurabhmishra.exoplayersample.base.BaseViewModel
 import dev.saurabhmishra.exoplayersample.extensions.safeLaunch
+import dev.saurabhmishra.exoplayersample.uimodel.UIModelPlayerContent
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,6 +26,7 @@ class PlayerContentViewModel @Inject constructor(): BaseViewModel() {
 
 sealed class PlayerContentViewState {
     object Idle: PlayerContentViewState()
-    class ExpandedComments(): PlayerContentViewState()
-    class CollapsedComments(): PlayerContentViewState()
+    object Loading: PlayerContentViewState()
+    class ExpandedComments(val uiModelPlayerContent: UIModelPlayerContent): PlayerContentViewState()
+    class CollapsedComments(val uiModelPlayerContent: UIModelPlayerContent): PlayerContentViewState()
 }
