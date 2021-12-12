@@ -8,7 +8,8 @@ fun CommentEntity.toModel(): Comment {
         videoId = this.videoId,
         likeCount = this.likeCount,
         commentId = this.commentId,
-        commentContent = this.commentContent
+        commentContent = this.commentContent,
+        userId = this.userId
     )
 }
 
@@ -17,6 +18,7 @@ fun Comment.toEntity(): CommentEntity {
         videoId = this.videoId,
         likeCount = this.likeCount,
         commentId = this.commentId,
-        commentContent = this.commentContent
+        commentContent = this.commentContent,
+        userId = this.userId
     )
 }

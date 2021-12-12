@@ -7,6 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import dev.saurabhmishra.data.repository.CommentRepositoryImpl
 import dev.saurabhmishra.data.repository.VideoRepositoryImpl
 import dev.saurabhmishra.data.sources.CommentsLocalSource
+import dev.saurabhmishra.data.sources.CommentsRemoteSource
 import dev.saurabhmishra.data.sources.VideoLocalSource
 import dev.saurabhmishra.data.sources.VideoRemoteSource
 import dev.saurabhmishra.domain.repository.CommentsRepository
@@ -25,8 +26,11 @@ object RepositoryModule {
     }
 
     @Provides
-    fun provideCommentsRepository(commentsLocalSource: CommentsLocalSource): CommentsRepository {
-        return CommentRepositoryImpl(commentsLocalSource)
+    fun provideCommentsRepository(
+        commentsLocalSource: CommentsLocalSource,
+        remoteSource: CommentsRemoteSource
+    ): CommentsRepository {
+        return CommentRepositoryImpl(commentsLocalSource, remoteSource)
     }
 
 }

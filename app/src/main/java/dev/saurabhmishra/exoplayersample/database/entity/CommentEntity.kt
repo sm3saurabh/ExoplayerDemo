@@ -9,15 +9,19 @@ import androidx.room.PrimaryKey
         ForeignKey(
             entity = VideoEntity::class,
             parentColumns = ["videoId"],
-            childColumns = ["videoId"],
-            onDelete = ForeignKey.CASCADE,
-            onUpdate = ForeignKey.CASCADE
+            childColumns = ["videoId"]
+        ),
+        ForeignKey(
+            entity = UserEntity::class,
+            parentColumns = ["userId"],
+            childColumns = ["userId"]
         )
     ]
 )
 data class CommentEntity(
     @PrimaryKey val commentId: Long,
     val videoId: Long,
+    val userId: Long,
     val commentContent: String,
     val likeCount: Int
 )
