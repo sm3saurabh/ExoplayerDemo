@@ -9,6 +9,7 @@ import dev.saurabhmishra.exoplayersample.base.BaseFragment
 import dev.saurabhmishra.exoplayersample.databinding.FragmentPlayerContentBinding
 import dev.saurabhmishra.exoplayersample.extensions.nonNull
 import dev.saurabhmishra.exoplayersample.uimodel.UIModelVideo
+import dev.saurabhmishra.exoplayersample.utils.Wood
 
 // Comments
 // Video suggestions
@@ -37,39 +38,39 @@ class PlayerContentFragment : BaseFragment<PlayerContentViewModel, FragmentPlaye
     private fun setupController() {
         controller = PlayerContentController(object : PlayerContentController.EventHandler {
             override fun onCommentLiked(comment: Comment) {
-                TODO("Not yet implemented")
+                Wood.debug("Comment liked")
             }
 
             override fun onCommentDisliked(comment: Comment) {
-                TODO("Not yet implemented")
+                Wood.debug("Comment disliked")
             }
 
             override fun onCommentExpanded() {
-                TODO("Not yet implemented")
+                Wood.debug("Comment expanded")
             }
 
             override fun onCommentCollapsed() {
-                TODO("Not yet implemented")
+                Wood.debug("Comment collapsed")
             }
 
             override fun onVideoSelected(video: UIModelVideo) {
-                TODO("Not yet implemented")
+                Wood.debug("Video selected")
             }
 
             override fun onVideoLiked(currentVideo: UIModelVideo) {
-                TODO("Not yet implemented")
+                Wood.debug("video liked")
             }
 
             override fun onVideoDisliked(currentVideo: UIModelVideo) {
-                TODO("Not yet implemented")
+                Wood.debug("Video disliked")
             }
 
             override fun onVideoShared(currentVideo: UIModelVideo) {
-                TODO("Not yet implemented")
+                Wood.debug("video shared")
             }
 
             override fun onVideoDownloadRequested(currentVideo: UIModelVideo) {
-                TODO("Not yet implemented")
+                Wood.debug("video download requested")
             }
 
         })

@@ -6,7 +6,7 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 // Inspired from timber, but changed to suit my use-case
-object Logger {
+object Wood {
 
     private const val MAX_TAG_LENGTH = 23
     private const val CALL_STACK_INDEX = 3

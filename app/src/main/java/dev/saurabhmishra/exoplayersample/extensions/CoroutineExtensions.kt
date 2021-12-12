@@ -1,7 +1,7 @@
 package dev.saurabhmishra.exoplayersample.extensions
 
 import dev.saurabhmishra.exoplayersample.BuildConfig
-import dev.saurabhmishra.exoplayersample.utils.Logger
+import dev.saurabhmishra.exoplayersample.utils.Wood
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
@@ -12,7 +12,7 @@ private val defaultCoroutineExceptionHandler = CoroutineExceptionHandler { _, ex
     if (BuildConfig.DEBUG) {
         throw exception
     } else {
-        Logger.error( "Default Exception handler ${exception.localizedMessage}", exception)
+        Wood.error( "Default Exception handler ${exception.localizedMessage}", exception)
     }
 }
 
