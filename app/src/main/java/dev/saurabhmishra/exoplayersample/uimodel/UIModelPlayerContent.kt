@@ -38,8 +38,17 @@ data class UIModelVideo(
 }
 
 data class UIModelVideoComments(
-    val comments: List<Comment>,
+    val comments: List<UIModelComment>,
     val videoId: Long,
+    val uniqueId: Long
+) {
+    fun numberOfComments(): String {
+        return comments.size.toLong().formatNumberWithAbbr().orEmpty()
+    }
+}
+
+data class UIModelComment(
     val uniqueId: Long,
-    val isExpanded: Boolean
+    val comment: Comment,
+    val userName: String
 )

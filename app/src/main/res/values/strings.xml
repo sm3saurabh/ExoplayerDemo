@@ -3,4 +3,6 @@
   <string name="player_content_tag">Player content tag</string>
   <string name="label_share">Share</string>
   <string name="label_download">Download</string>
+  <string name="label_comments">Comments</string>
+  <string name="comments_header_toggle">Comments header toggle</string>
 </resources>

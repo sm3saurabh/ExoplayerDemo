@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="comments"
+      type="dev.saurabhmishra.exoplayersample.uimodel.UIModelVideoComments" />
+
+  </data>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:layout_marginTop="2dp"
+    android:background="@color/black_shade">
+
+
+    <TextView
+      android:id="@+id/comments_header_title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@color/white"
+      android:textSize="12sp"
+      android:text="@string/label_comments"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+      android:id="@+id/comments_header_number"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@color/white"
+      android:textSize="12sp"
+      android:text="@{ comments.numberOfComments() }"
+      app:layout_constraintTop_toTopOf="parent"
+      android:layout_marginStart="20dp"
+      tools:text="793"
+      app:layout_constraintStart_toEndOf="@id/comments_header_title"/>
+
+
+    <ImageView
+      android:id="@+id/comments_header_toggle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:src="@drawable/ic_baseline_expand_more_24"
+      app:layout_constraintTop_toTopOf="parent"
+      android:layout_marginStart="20dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:contentDescription="@string/comments_header_toggle" />
+
+
+
+
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
