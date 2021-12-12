@@ -1,6 +1,7 @@
 package dev.saurabhmishra.exoplayersample.uimodel
 
 import dev.saurabhmishra.domain.models.Comment
+import dev.saurabhmishra.domain.models.User
 import dev.saurabhmishra.domain.models.VideoData
 import dev.saurabhmishra.exoplayersample.extensions.formatNumberWithAbbr
 import dev.saurabhmishra.exoplayersample.extensions.formatVideoTime
@@ -18,7 +19,8 @@ data class UIModelVideoSuggestions(
 
 data class UIModelVideo(
     val uniqueId: Long,
-    val videoData: VideoData
+    val videoData: VideoData,
+    val user: User
 ) {
     fun formatCurrentViews(): String {
         return videoData.views.formatNumberWithAbbr().orEmpty()
