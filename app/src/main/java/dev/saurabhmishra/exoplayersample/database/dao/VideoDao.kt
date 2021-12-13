@@ -11,6 +11,9 @@ interface VideoDao: BaseDao<VideoEntity> {
     @Query("SELECT * FROM VideoEntity")
     suspend fun getAllVideos(): List<VideoEntity>
 
+    @Query("SELECT * FROM VideoEntity WHERE videoId = :videoId")
+    suspend fun getVideoForId(videoId: Long): VideoEntity?
+
     @Query("SELECT * FROM VideoEntity")
     fun getAllVideosFlow(): Flow<List<VideoEntity>>
 

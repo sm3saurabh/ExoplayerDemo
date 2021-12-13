@@ -25,7 +25,11 @@ class VideoRepositoryImpl(
         }
     }
 
-    override fun getLocalVideos(): Flow<List<VideoData>> {
+    override suspend fun getLocalVideos(): List<VideoData> {
+        return localSource.getAllVideos()
+    }
+
+    override fun getLocalVideosFlow(): Flow<List<VideoData>> {
         return localSource.getAllVideosFlow()
     }
 
@@ -36,4 +40,14 @@ class VideoRepositoryImpl(
     override suspend fun deleteLocalVideos() {
         localSource.deleteLocalVideos()
     }
+
+    override suspend fun getCurrentSelectedVideo(): VideoData? {
+        return localSource.getCurrentSelectedVideo()
+    }
+
+    override suspend fun setCurrentSelectedVideo(videoData: VideoData) {
+        localSource.setCurrentSelectedVideo(videoData)
+    }
+
+
 }

@@ -11,12 +11,13 @@ fun VideoResponse.toModel(): VideoData {
         likeCount = this.likeCount ?: 0,
         views = this.views ?: 0,
         dislikeCount = this.dislikeCount ?: 0,
-        uploadedTimeStamp = this.uploadedTimeStamp ?: 0
+        uploadedTimeStamp = this.uploadedTimeStamp ?: 0,
+        userId = this.userId ?: 0
     )
 }
 
 fun VideoData.toResponse() : VideoResponse {
     return VideoResponse(
-        videoId, videoUrl, title, views, likeCount, dislikeCount, uploadedTimeStamp
+        videoId, userId, videoUrl, title, views, likeCount, dislikeCount, uploadedTimeStamp
     )
 }

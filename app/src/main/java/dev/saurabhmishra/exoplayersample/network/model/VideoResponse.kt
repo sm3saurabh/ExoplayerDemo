@@ -5,6 +5,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class VideoResponse(
     val videoId: Long,
+    val userId: Long? = null,
     val videoUrl: String? = null,
     val title: String? = null,
     val views: Long? = null,

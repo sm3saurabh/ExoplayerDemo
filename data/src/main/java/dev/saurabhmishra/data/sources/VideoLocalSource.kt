@@ -9,4 +9,6 @@ interface VideoLocalSource {
     fun getAllVideosFlow(): Flow<List<VideoData>>
     fun getVideoSuggestions(currentVideoData: VideoData): Flow<List<VideoData>>
     suspend fun deleteLocalVideos()
+    suspend fun getCurrentSelectedVideo(): VideoData?
+    suspend fun setCurrentSelectedVideo(videoData: VideoData)
 }

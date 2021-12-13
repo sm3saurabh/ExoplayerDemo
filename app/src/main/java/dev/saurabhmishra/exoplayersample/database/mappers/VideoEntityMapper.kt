@@ -9,6 +9,7 @@ fun VideoEntity.toModel(): VideoData {
         videoUrl = this.videoUrl,
         title = this.title,
         views = this.views,
+        userId = this.userId,
         likeCount = this.likeCount,
         dislikeCount = this.dislikeCount,
         uploadedTimeStamp = this.uploadedTimeStamp
@@ -21,6 +22,7 @@ fun VideoData.toEntity(): VideoEntity {
         videoUrl = this.videoUrl,
         title = this.title,
         views = this.views,
+        userId = this.userId,
         likeCount = this.likeCount,
         dislikeCount = this.dislikeCount,
         uploadedTimeStamp = this.uploadedTimeStamp

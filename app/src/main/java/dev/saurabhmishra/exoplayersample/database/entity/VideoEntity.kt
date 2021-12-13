@@ -9,6 +9,7 @@ data class VideoEntity(
     val videoUrl: String,
     val title: String,
     val views: Long,
+    val userId: Long,
     val likeCount: Long,
     val dislikeCount: Long,
     val uploadedTimeStamp: Long

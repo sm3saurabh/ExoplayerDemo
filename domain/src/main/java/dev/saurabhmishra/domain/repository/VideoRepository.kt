@@ -7,9 +7,15 @@ interface VideoRepository {
 
     suspend fun loadAndSaveVideos()
 
-    fun getLocalVideos(): Flow<List<VideoData>>
+    suspend fun getLocalVideos(): List<VideoData>
+
+    fun getLocalVideosFlow(): Flow<List<VideoData>>
 
     fun getLocalVideoSuggestions(currentVideoData: VideoData): Flow<List<VideoData>>
 
     suspend fun deleteLocalVideos()
+
+    suspend fun getCurrentSelectedVideo(): VideoData?
+
+    suspend fun setCurrentSelectedVideo(videoData: VideoData)
 }
