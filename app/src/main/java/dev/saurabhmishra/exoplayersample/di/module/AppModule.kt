@@ -7,6 +7,7 @@ import com.google.android.exoplayer2.DefaultRenderersFactory
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.database.DatabaseProvider
 import com.google.android.exoplayer2.database.DefaultDatabaseProvider
+import com.google.android.exoplayer2.database.StandaloneDatabaseProvider
 import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSource
 import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSourceFactory
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
@@ -34,11 +35,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideExoplayer(@ApplicationContext context: Context, httpClient: OkHttpClient, sqLiteOpenHelper: SQLiteOpenHelper): ExoPlayer {
+    fun provideExoplayer(@ApplicationContext context: Context, httpClient: OkHttpClient): ExoPlayer {
 
         val httpSourceFactory = OkHttpDataSource.Factory(httpClient).setUserAgent(Util.getUserAgent(context, BuildConfig.APPLICATION_ID))
 
-        val cache = SimpleCache(context.filesDir, NoOpCacheEvictor(), DefaultDatabaseProvider(sqLiteOpenHelper))
+        val cache = SimpleCache(context.filesDir, NoOpCacheEvictor(), StandaloneDatabaseProvider(context))
 
         val dataSourceFactory = CacheDataSource.Factory()
             .setCache(cache)
@@ -59,7 +60,6 @@ object AppModule {
     fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
         return context.getSharedPreferences(AppConstants.SharedPreferences.NAME, Context.MODE_PRIVATE)
     }
-
 
 
 }
