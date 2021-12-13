@@ -1,19 +1,14 @@
 package dev.saurabhmishra.exoplayersample.di.module
 
+import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dev.saurabhmishra.data.sources.CommentsLocalSource
-import dev.saurabhmishra.data.sources.CommentsRemoteSource
-import dev.saurabhmishra.data.sources.VideoLocalSource
-import dev.saurabhmishra.data.sources.VideoRemoteSource
+import dev.saurabhmishra.data.sources.*
 import dev.saurabhmishra.exoplayersample.database.ExoplayerSampleDB
 import dev.saurabhmishra.exoplayersample.network.Api
-import dev.saurabhmishra.exoplayersample.source.CommentsLocalSourceImpl
-import dev.saurabhmishra.exoplayersample.source.CommentsRemoteSourceImpl
-import dev.saurabhmishra.exoplayersample.source.VideoLocalSourceImpl
-import dev.saurabhmishra.exoplayersample.source.VideoRemoteSourceImpl
+import dev.saurabhmishra.exoplayersample.source.*
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
@@ -41,7 +36,19 @@ object SourceModule {
 
     @Provides
     @Singleton
-    fun provideVideoLocalSource(db: ExoplayerSampleDB): VideoLocalSource {
-        return VideoLocalSourceImpl(db)
+    fun provideVideoLocalSource(db: ExoplayerSampleDB, sharedPreferences: SharedPreferences): VideoLocalSource {
+        return VideoLocalSourceImpl(db, sharedPreferences)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserLocalSource(db: ExoplayerSampleDB): UserLocalSource {
+        return UserLocalSourceImpl(db)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserRemoteSource(api: Api): UserRemoteSource {
+        return UserRemoteSourceImpl(api, Dispatchers.IO)
     }
 }

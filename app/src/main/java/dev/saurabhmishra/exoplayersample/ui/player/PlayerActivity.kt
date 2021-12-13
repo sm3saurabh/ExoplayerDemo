@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.material.imageview.ShapeableImageView
+import dagger.hilt.android.AndroidEntryPoint
 import dev.saurabhmishra.exoplayersample.R
 import dev.saurabhmishra.exoplayersample.base.BaseActivity
 import dev.saurabhmishra.exoplayersample.databinding.ActivityPlayerBinding
@@ -18,6 +19,7 @@ import dev.saurabhmishra.exoplayersample.extensions.nonNull
 import dev.saurabhmishra.exoplayersample.ui.player.fullscreen.FullScreenPlayerDialog
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class PlayerActivity: BaseActivity<PlayerViewModel, ActivityPlayerBinding>(), PlayerFullscreenDelegate {
 
     @Inject lateinit var player: ExoPlayer

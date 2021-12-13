@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.saurabhmishra.exoplayersample.network.Api
 import dev.saurabhmishra.exoplayersample.utils.AppConstants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -41,6 +42,12 @@ object NetworkModule {
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideApi(retrofit: Retrofit): Api {
+        return retrofit.create(Api::class.java)
     }
 
 }

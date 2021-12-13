@@ -1,6 +1,7 @@
 package dev.saurabhmishra.exoplayersample.di.module
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.database.sqlite.SQLiteOpenHelper
 import com.google.android.exoplayer2.DefaultRenderersFactory
 import com.google.android.exoplayer2.ExoPlayer
@@ -19,9 +20,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityScoped
 import dagger.hilt.components.SingletonComponent
 import dev.saurabhmishra.exoplayersample.BuildConfig
+import dev.saurabhmishra.exoplayersample.utils.AppConstants
 import okhttp3.OkHttpClient
 import javax.inject.Singleton
 
@@ -31,7 +34,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideExoplayer(context: Context, httpClient: OkHttpClient, sqLiteOpenHelper: SQLiteOpenHelper): ExoPlayer {
+    fun provideExoplayer(@ApplicationContext context: Context, httpClient: OkHttpClient, sqLiteOpenHelper: SQLiteOpenHelper): ExoPlayer {
 
         val httpSourceFactory = OkHttpDataSource.Factory(httpClient).setUserAgent(Util.getUserAgent(context, BuildConfig.APPLICATION_ID))
 
@@ -50,6 +53,13 @@ object AppModule {
             .setMediaSourceFactory(mediaSourceFactory)
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
+        return context.getSharedPreferences(AppConstants.SharedPreferences.NAME, Context.MODE_PRIVATE)
+    }
+
 
 
 }
