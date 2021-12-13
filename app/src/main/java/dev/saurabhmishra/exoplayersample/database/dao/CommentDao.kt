@@ -11,6 +11,9 @@ interface CommentDao: BaseDao<CommentEntity> {
     @Query("SELECT * FROM CommentEntity")
     suspend fun getAllComments(): List<CommentEntity>
 
+    @Query("SELECT * FROM CommentEntity WHERE videoId = :videoId")
+    fun getAllCommentsForCurrentVideo(videoId: Long): Flow<List<CommentEntity>>
+
     @Query("SELECT * FROM CommentEntity")
     fun getAllCommentsFlow(): Flow<List<CommentEntity>>
 

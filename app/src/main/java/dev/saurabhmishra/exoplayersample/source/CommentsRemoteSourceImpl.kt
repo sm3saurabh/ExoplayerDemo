@@ -1,19 +1,19 @@
 package dev.saurabhmishra.exoplayersample.source
 
-import dev.saurabhmishra.data.sources.VideoRemoteSource
+import dev.saurabhmishra.data.sources.CommentsRemoteSource
 import dev.saurabhmishra.domain.SafeResult
-import dev.saurabhmishra.domain.models.VideoData
+import dev.saurabhmishra.domain.models.Comment
 import dev.saurabhmishra.exoplayersample.network.Api
 import dev.saurabhmishra.exoplayersample.network.mappers.toModel
 import dev.saurabhmishra.exoplayersample.utils.safeApiCall
 
-class VideoRemoteSourceImpl(
+class CommentsRemoteSourceImpl(
     private val api: Api
-): VideoRemoteSource {
+): CommentsRemoteSource {
 
-    override suspend fun getVideosFromRemote(): SafeResult<List<VideoData>> {
+    override suspend fun getAllComments(): SafeResult<List<Comment>> {
         return safeApiCall {
-            api.loadVideos().map { response ->
+            api.loadComments().map { response ->
                 response.toModel()
             }
         }

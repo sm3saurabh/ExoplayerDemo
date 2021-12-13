@@ -5,11 +5,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface VideoRepository {
 
-    suspend fun loadAndSaveVideos(): List<VideoData>
+    suspend fun loadAndSaveVideos()
 
     fun getLocalVideos(): Flow<List<VideoData>>
 
-    fun getLocalVideoSuggestions(): Flow<List<VideoData>>
+    fun getLocalVideoSuggestions(currentVideoData: VideoData): Flow<List<VideoData>>
 
     suspend fun deleteLocalVideos()
 }

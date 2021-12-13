@@ -1,7 +1,7 @@
 package dev.saurabhmishra.exoplayersample.extensions
 
 import dev.saurabhmishra.exoplayersample.BuildConfig
-import dev.saurabhmishra.exoplayersample.utils.Wood
+import dev.saurabhmishra.domain.Wood
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext

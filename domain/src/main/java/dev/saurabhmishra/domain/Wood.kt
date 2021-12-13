@@ -1,4 +1,4 @@
-package dev.saurabhmishra.exoplayersample.utils
+package dev.saurabhmishra.domain
 
 import android.os.Build
 import android.util.Log

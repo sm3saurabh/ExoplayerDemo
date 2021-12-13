@@ -9,7 +9,7 @@ import dev.saurabhmishra.exoplayersample.base.BaseFragment
 import dev.saurabhmishra.exoplayersample.databinding.FragmentPlayerContentBinding
 import dev.saurabhmishra.exoplayersample.extensions.nonNull
 import dev.saurabhmishra.exoplayersample.uimodel.UIModelVideo
-import dev.saurabhmishra.exoplayersample.utils.Wood
+import dev.saurabhmishra.domain.Wood
 
 // Comments
 // Video suggestions

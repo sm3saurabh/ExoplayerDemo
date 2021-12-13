@@ -1,5 +1,8 @@
 package dev.saurabhmishra.data.sources
 
-interface CommentsRemoteSource {
+import dev.saurabhmishra.domain.SafeResult
+import dev.saurabhmishra.domain.models.Comment
 
+interface CommentsRemoteSource {
+    suspend fun getAllComments(): SafeResult<List<Comment>>
 }
