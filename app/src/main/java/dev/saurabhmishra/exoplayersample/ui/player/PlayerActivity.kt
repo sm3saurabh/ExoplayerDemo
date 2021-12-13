@@ -33,6 +33,11 @@ class PlayerActivity: BaseActivity<PlayerViewModel, ActivityPlayerBinding>(), Pl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (savedInstanceState == null) {
+            viewModel.loadData()
+        }
+
         startObserving()
         binding.miniPlayer.player = player
     }
