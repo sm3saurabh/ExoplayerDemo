@@ -1,7 +1,7 @@
 package dev.saurabhmishra.exoplayersample.utils
 
-import android.util.Log
 import dev.saurabhmishra.domain.SafeResult
+import dev.saurabhmishra.domain.Wood
 import retrofit2.HttpException
 
 suspend fun <T> safeApiCall(
@@ -11,7 +11,7 @@ suspend fun <T> safeApiCall(
             SafeResult.Success(apiCall.invoke())
         } catch (throwable: Throwable) {
             throwable.printStackTrace()
-            Log.e("safeApiCall", throwable.message ?: "")
+            Wood.error(throwable.localizedMessage.orEmpty(), throwable)
             when (throwable) {
                 is HttpException -> {
                     val code = throwable.response()?.code()
