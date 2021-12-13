@@ -4,20 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(
-    foreignKeys = [
-        ForeignKey(
-            entity = VideoEntity::class,
-            parentColumns = ["videoId"],
-            childColumns = ["videoId"]
-        ),
-        ForeignKey(
-            entity = UserEntity::class,
-            parentColumns = ["userId"],
-            childColumns = ["userId"]
-        )
-    ]
-)
+@Entity
 data class CommentEntity(
     @PrimaryKey val commentId: Long,
     val videoId: Long,

@@ -60,9 +60,9 @@ class PlayerViewModel @Inject constructor(
     }
 
     private suspend fun loadDataFromRemote() {
+        userRepository.loadAndSaveUsers()
         videoRepository.loadAndSaveVideos()
         commentsRepository.loadAndSaveComments()
-        userRepository.loadAndSaveUsers()
     }
 
     fun getIsFullScreen() = isFullScreen

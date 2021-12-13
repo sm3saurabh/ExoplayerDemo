@@ -5,4 +5,5 @@
   <string name="label_download">Download</string>
   <string name="label_comments">Comments</string>
   <string name="comments_header_toggle">Comments header toggle</string>
+  <string name="go_fullscreen">Go fullscreen</string>
 </resources>

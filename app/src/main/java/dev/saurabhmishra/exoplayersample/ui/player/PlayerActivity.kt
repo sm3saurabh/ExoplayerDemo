@@ -5,25 +5,21 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.material.imageview.ShapeableImageView
 import dagger.hilt.android.AndroidEntryPoint
 import dev.saurabhmishra.exoplayersample.R
 import dev.saurabhmishra.exoplayersample.base.BaseActivity
 import dev.saurabhmishra.exoplayersample.databinding.ActivityPlayerBinding
 import dev.saurabhmishra.exoplayersample.extensions.nonNull
-import dev.saurabhmishra.exoplayersample.ui.player.fullscreen.FullScreenPlayerDialog
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class PlayerActivity: BaseActivity<PlayerViewModel, ActivityPlayerBinding>(), PlayerFullscreenDelegate {
+class PlayerActivity: BaseActivity<PlayerViewModel, ActivityPlayerBinding>() {
 
     @Inject lateinit var player: ExoPlayer
-    private val fullScreenDialog = FullScreenPlayerDialog()
 
     override fun layoutId(): Int {
         return R.layout.activity_player
@@ -39,6 +35,8 @@ class PlayerActivity: BaseActivity<PlayerViewModel, ActivityPlayerBinding>(), Pl
         if (savedInstanceState == null) {
             viewModel.loadData()
         }
+
+        setupListeners()
 
         startObserving()
         binding.miniPlayer.player = player
@@ -57,11 +55,18 @@ class PlayerActivity: BaseActivity<PlayerViewModel, ActivityPlayerBinding>(), Pl
         }
     }
 
+    private fun setupListeners() {
+        binding.fullscreenButton.setOnClickListener {
+            openFullScreen()
+        }
+    }
+
     private fun toggleLoading(show: Boolean) {
         with(binding) {
             progressBar.isVisible = show
             contentRecycler.isGone = show
             miniPlayer.isGone = show
+            fullscreenButton.isGone = show
         }
     }
 
@@ -77,6 +82,14 @@ class PlayerActivity: BaseActivity<PlayerViewModel, ActivityPlayerBinding>(), Pl
         Toast.makeText(this, errorState.msg, Toast.LENGTH_LONG).show()
     }
 
+    override fun onBackPressed() {
+        if (viewModel.getIsFullScreen()) {
+            closeFullScreen()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     override fun onStop() {
         super.onStop()
         player.pause()
@@ -87,29 +100,31 @@ class PlayerActivity: BaseActivity<PlayerViewModel, ActivityPlayerBinding>(), Pl
         player.release()
     }
 
-    override fun dialogBackPressed() {
-        if (viewModel.getIsFullScreen()) {
-            closeFullScreenDialog()
+    private fun closeFullScreen() {
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+        if (supportActionBar != null) {
+            supportActionBar?.show()
         }
-    }
-
-    private fun closeFullScreenDialog() {
-        (binding.miniPlayer.parent as ViewGroup).removeView(binding.miniPlayer)
-        ConstraintSet().apply {
-            clone(binding.playerLayoutRoot)
-            binding.playerLayoutRoot.addView(binding.miniPlayer, 0)
-            connect(binding.miniPlayer.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
-            applyTo(binding.playerLayoutRoot)
-        }
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        val params = binding.miniPlayer.layoutParams
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT
+        params.height = (200 * applicationContext.resources.displayMetrics.density).toInt()
+        binding.miniPlayer.layoutParams = params
         viewModel.setIsFullScreen(false)
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
     }
 
-    private fun openFullScreenDialog() {
-        (binding.miniPlayer.parent as ViewGroup).removeView(binding.miniPlayer)
-        fullScreenDialog.dialog?.addContentView(binding.miniPlayer, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
-        viewModel.setIsFullScreen(true)
-        fullScreenDialog.show(supportFragmentManager, null)
+    private fun openFullScreen() {
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_FULLSCREEN
+            or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+            or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
+        if (supportActionBar != null) {
+            supportActionBar!!.hide()
+        }
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        val params = binding.miniPlayer.layoutParams
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT
+        params.height = ViewGroup.LayoutParams.MATCH_PARENT
+        binding.miniPlayer.layoutParams = params
+        viewModel.setIsFullScreen(true)
     }
 }
