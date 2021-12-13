@@ -36,18 +36,21 @@ class PlayerContentController(
 
     private fun buildItems(state: PlayerContentViewState) {
         when (state) {
-            is PlayerContentViewState.CollapsedComments -> {
-                buildCommentHeaderAndSuggestions(state.uiModelPlayerContent)
-            }
-            is PlayerContentViewState.ExpandedComments -> {
-                buildExpandedComments(state.uiModelPlayerContent)
-            }
+            is PlayerContentViewState.PlayerContent -> buildPlayerContent(state)
             PlayerContentViewState.Idle -> {
                 // do nothing
             }
             PlayerContentViewState.Loading -> {
                 buildLoader()
             }
+        }
+    }
+
+    private fun buildPlayerContent(state: PlayerContentViewState.PlayerContent) {
+        if (state.isCommentExpanded) {
+            buildExpandedComments(state.uiModelPlayerContent)
+        } else {
+            buildCommentHeaderAndSuggestions(state.uiModelPlayerContent)
         }
     }
 

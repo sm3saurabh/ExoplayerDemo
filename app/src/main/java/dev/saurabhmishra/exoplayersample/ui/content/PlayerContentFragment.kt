@@ -33,6 +33,7 @@ class PlayerContentFragment : BaseFragment<PlayerContentViewModel, FragmentPlaye
         setupController()
         setupRecycler()
         startObserving()
+        viewModel.loadPlayerContent()
     }
 
     private fun setupController() {
