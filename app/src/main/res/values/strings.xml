@@ -6,4 +6,6 @@
   <string name="label_comments">Comments</string>
   <string name="comments_header_toggle">Comments header toggle</string>
   <string name="go_fullscreen">Go fullscreen</string>
+  <string name="action_submit">Submit</string>
+  <string name="label_close">Close</string>
 </resources>

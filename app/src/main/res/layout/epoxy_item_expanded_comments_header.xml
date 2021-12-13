@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <data>
+    <variable
+      name="commentSubmitClickListener"
+      type="android.view.View.OnClickListener" />
+    <variable
+      name="closeCommentsListener"
+      type="android.view.View.OnClickListener" />
+  </data>
+
+  <LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:background="@color/black_shade"
+    >
+
+    <TextView
+      android:id="@+id/close_expanded_comments"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/label_close"
+      android:textColor="@color/white"
+      android:textSize="14sp"
+      android:gravity="center"
+      android:padding="8dp"
+      android:onClick="@{ closeCommentsListener }"
+      />
+
+    <EditText
+      android:id="@+id/comment_input"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:textColor="@color/white"
+      />
+
+    <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/action_submit"
+      android:onClick="@{ commentSubmitClickListener }"
+      />
+
+
+  </LinearLayout>
+
+</layout>

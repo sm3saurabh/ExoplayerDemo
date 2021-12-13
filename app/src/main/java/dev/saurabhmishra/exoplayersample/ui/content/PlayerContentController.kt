@@ -2,14 +2,11 @@ package dev.saurabhmishra.exoplayersample.ui.content
 
 import com.airbnb.epoxy.TypedEpoxyController
 import dev.saurabhmishra.domain.models.Comment
-import dev.saurabhmishra.exoplayersample.commentContent
-import dev.saurabhmishra.exoplayersample.commentsHeader
-import dev.saurabhmishra.exoplayersample.currentVideoStats
+import dev.saurabhmishra.exoplayersample.*
 import dev.saurabhmishra.exoplayersample.uimodel.UIModelPlayerContent
 import dev.saurabhmishra.exoplayersample.uimodel.UIModelVideo
 import dev.saurabhmishra.exoplayersample.uimodel.UIModelVideoComments
 import dev.saurabhmishra.exoplayersample.uimodel.UIModelVideoSuggestions
-import dev.saurabhmishra.exoplayersample.videoItem
 
 class PlayerContentController(
     private val eventHandler: EventHandler
@@ -96,6 +93,13 @@ class PlayerContentController(
 
     private fun buildExpandedComments(data: UIModelPlayerContent) {
         buildCurrentVideoStats(data.currentVideo)
+
+        expandedCommentsHeader {
+            id("Expanded comments header")
+            closeCommentsListener { _ ->
+                this@PlayerContentController.eventHandler.onCommentCollapsed()
+            }
+        }
 
         data.videoComments.comments.forEach { commentModel ->
             commentContent {
