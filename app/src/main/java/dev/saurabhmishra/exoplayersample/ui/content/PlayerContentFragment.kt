@@ -11,6 +11,7 @@ import dev.saurabhmishra.exoplayersample.databinding.FragmentPlayerContentBindin
 import dev.saurabhmishra.exoplayersample.extensions.nonNull
 import dev.saurabhmishra.exoplayersample.uimodel.UIModelVideo
 import dev.saurabhmishra.domain.Wood
+import dev.saurabhmishra.exoplayersample.extensions.fragmentDelegate
 
 // Comments
 // Video suggestions
@@ -20,6 +21,7 @@ class PlayerContentFragment : BaseFragment<PlayerContentViewModel, FragmentPlaye
 
 
     private lateinit var controller: PlayerContentController
+    private val playerContentDelegate by fragmentDelegate<PlayerContentDelegate>()
 
     override fun layoutId(): Int {
         return R.layout.fragment_player_content
@@ -50,14 +52,18 @@ class PlayerContentFragment : BaseFragment<PlayerContentViewModel, FragmentPlaye
 
             override fun onCommentExpanded() {
                 Wood.debug("Comment expanded")
+                viewModel.expandComments()
             }
 
             override fun onCommentCollapsed() {
                 Wood.debug("Comment collapsed")
+                viewModel.collapseComments()
             }
 
             override fun onVideoSelected(video: UIModelVideo) {
                 Wood.debug("Video selected")
+                playerContentDelegate?.onVideoSelected(video)
+                viewModel.loadPlayerContent()
             }
 
             override fun onVideoLiked(currentVideo: UIModelVideo) {

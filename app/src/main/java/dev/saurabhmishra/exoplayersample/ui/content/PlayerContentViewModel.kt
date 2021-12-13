@@ -15,6 +15,7 @@ import dev.saurabhmishra.exoplayersample.uimodel.toPlayerContentModel
 import dev.saurabhmishra.exoplayersample.uimodel.toUIModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.zip
 import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
@@ -30,12 +31,11 @@ class PlayerContentViewModel @Inject constructor(
 
     private val loadedContent = AtomicBoolean(false)
 
-
     fun loadPlayerContent() {
         viewModelScope.safeLaunch {
             videoRepository.getLocalVideosFlow().collect { videos ->
                 // Start the process when some videos are loaded in table
-                if (!loadedContent.get() && videos.isNotEmpty()) {
+                if (videos.isNotEmpty()) {
                    startLoadingContent()
                 }
             }
@@ -99,6 +99,24 @@ class PlayerContentViewModel @Inject constructor(
 
                 videoUiModel.toPlayerContentModel(commentsUiModel, currentVideo)
             }
+    }
+
+    fun expandComments() {
+        viewState.value?.let { state ->
+            if (state is PlayerContentViewState.PlayerContent) {
+                val newState = PlayerContentViewState.PlayerContent(state.uiModelPlayerContent, true)
+                viewState.setValue(newState)
+            }
+        }
+    }
+
+    fun collapseComments() {
+        viewState.value?.let { state ->
+            if (state is PlayerContentViewState.PlayerContent) {
+                val newState = PlayerContentViewState.PlayerContent(state.uiModelPlayerContent, false)
+                viewState.setValue(newState)
+            }
+        }
     }
 
 

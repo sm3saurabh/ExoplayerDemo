@@ -12,7 +12,6 @@ import dev.saurabhmishra.exoplayersample.base.BaseViewModel
 import dev.saurabhmishra.exoplayersample.extensions.safeLaunch
 import dev.saurabhmishra.exoplayersample.uimodel.UIModelVideo
 import dev.saurabhmishra.exoplayersample.uimodel.toUIModel
-import kotlinx.coroutines.flow.collect
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -31,11 +30,11 @@ class PlayerViewModel @Inject constructor(
         viewModelScope.safeLaunch {
             viewState.setValue(PlayerViewState.Loading)
             loadDataFromRemote()
-            getSelectedVideo()
+            playSelectedVideo()
         }
     }
 
-    private suspend fun getSelectedVideo() {
+    private suspend fun playSelectedVideo() {
         val video = videoRepository.getCurrentSelectedVideo()
         if (video == null) {
             getFirstSelectedVideo()
@@ -68,6 +67,13 @@ class PlayerViewModel @Inject constructor(
     fun getIsFullScreen() = isFullScreen
     fun setIsFullScreen(value: Boolean) {
         isFullScreen = value
+    }
+
+    fun selectVideo(currentVideo: UIModelVideo) {
+        viewModelScope.safeLaunch {
+            videoRepository.setCurrentSelectedVideo(currentVideo.videoData)
+            playSelectedVideo()
+        }
     }
 
 }

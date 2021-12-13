@@ -14,10 +14,12 @@ import dev.saurabhmishra.exoplayersample.R
 import dev.saurabhmishra.exoplayersample.base.BaseActivity
 import dev.saurabhmishra.exoplayersample.databinding.ActivityPlayerBinding
 import dev.saurabhmishra.exoplayersample.extensions.nonNull
+import dev.saurabhmishra.exoplayersample.ui.content.PlayerContentDelegate
+import dev.saurabhmishra.exoplayersample.uimodel.UIModelVideo
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class PlayerActivity: BaseActivity<PlayerViewModel, ActivityPlayerBinding>() {
+class PlayerActivity: BaseActivity<PlayerViewModel, ActivityPlayerBinding>(), PlayerContentDelegate {
 
     @Inject lateinit var player: ExoPlayer
 
@@ -35,7 +37,6 @@ class PlayerActivity: BaseActivity<PlayerViewModel, ActivityPlayerBinding>() {
         if (savedInstanceState == null) {
             viewModel.loadData()
         }
-
         setupListeners()
 
         startObserving()
@@ -108,7 +109,7 @@ class PlayerActivity: BaseActivity<PlayerViewModel, ActivityPlayerBinding>() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         val params = binding.miniPlayer.layoutParams
         params.width = ViewGroup.LayoutParams.MATCH_PARENT
-        params.height = (200 * applicationContext.resources.displayMetrics.density).toInt()
+        params.height = (250 * applicationContext.resources.displayMetrics.density).toInt()
         binding.miniPlayer.layoutParams = params
         viewModel.setIsFullScreen(false)
     }
@@ -126,5 +127,9 @@ class PlayerActivity: BaseActivity<PlayerViewModel, ActivityPlayerBinding>() {
         params.height = ViewGroup.LayoutParams.MATCH_PARENT
         binding.miniPlayer.layoutParams = params
         viewModel.setIsFullScreen(true)
+    }
+
+    override fun onVideoSelected(currentVideo: UIModelVideo) {
+        viewModel.selectVideo(currentVideo)
     }
 }

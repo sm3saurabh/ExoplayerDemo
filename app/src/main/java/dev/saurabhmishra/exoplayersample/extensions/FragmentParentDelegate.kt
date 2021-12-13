@@ -2,6 +2,7 @@ package dev.saurabhmishra.exoplayersample.extensions
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
+import dagger.hilt.android.internal.managers.ViewComponentManager
 import java.lang.ref.WeakReference
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
@@ -29,7 +30,14 @@ class FragmentParentDelegate<T>(
         super.onCreate(owner)
         delegate = fragment?.parentFragment?.let { parent ->
             parent as? T?
-        } ?: fragment?.context as? T?
+        } ?: run {
+            val context = fragment?.requireContext()
+            val actualContext = if (context is ViewComponentManager.FragmentContextWrapper) {
+                context.baseContext
+            } else context
+
+            actualContext as? T?
+        }
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
