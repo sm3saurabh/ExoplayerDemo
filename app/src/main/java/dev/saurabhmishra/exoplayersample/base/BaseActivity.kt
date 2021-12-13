@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import dagger.hilt.android.AndroidEntryPoint
 
 abstract class BaseActivity<VM: BaseViewModel, VB: ViewDataBinding>: AppCompatActivity(), BaseUIComponent<VM, VB> {
 
@@ -17,11 +18,12 @@ abstract class BaseActivity<VM: BaseViewModel, VB: ViewDataBinding>: AppCompatAc
 
     override lateinit var viewModel: VM
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        _binding = DataBindingUtil.setContentView(this, layoutId())
         viewModel = ViewModelProvider(this)[viewModelClass()]
+        _binding = DataBindingUtil.setContentView(this, layoutId())
+
     }
 
     override fun onDestroy() {

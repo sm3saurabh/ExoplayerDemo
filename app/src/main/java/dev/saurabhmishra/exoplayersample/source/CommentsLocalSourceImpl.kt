@@ -7,16 +7,22 @@ import dev.saurabhmishra.exoplayersample.database.ExoplayerSampleDB
 import dev.saurabhmishra.exoplayersample.database.mappers.toEntity
 import dev.saurabhmishra.exoplayersample.database.mappers.toModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
+import kotlin.coroutines.CoroutineContext
 
 class CommentsLocalSourceImpl(
-    private val db: ExoplayerSampleDB
+    private val db: ExoplayerSampleDB,
+    private val executionContext: CoroutineContext
 ): CommentsLocalSource {
     override suspend fun saveComments(comments: List<Comment>) {
-        val entities = comments.map { comment ->
-            comment.toEntity()
+        withContext(executionContext) {
+            val entities = comments.map { comment ->
+                comment.toEntity()
+            }
+            db.commentDao().insertAll(entities)
         }
-        db.commentDao().insertAll(entities)
     }
 
     override fun getAllCommentsForCurrentVideo(currentVideoData: VideoData): Flow<List<Comment>> {
@@ -25,7 +31,7 @@ class CommentsLocalSourceImpl(
                 entities.map { entity ->
                     entity.toModel()
                 }
-            }
+            }.flowOn(executionContext)
     }
 
     override fun getAllComments(): Flow<List<Comment>> {
@@ -34,18 +40,24 @@ class CommentsLocalSourceImpl(
                 entities.map { entity ->
                     entity.toModel()
                 }
-            }
+            }.flowOn(executionContext)
     }
 
     override suspend fun deleteAllComments() {
-        db.commentDao().deleteAllComments()
+        withContext(executionContext) {
+            db.commentDao().deleteAllComments()
+        }
     }
 
     override suspend fun addComment(comment: Comment) {
-        db.commentDao().insertViaReplace(comment.toEntity())
+       withContext(executionContext) {
+           db.commentDao().insertViaReplace(comment.toEntity())
+       }
     }
 
     override suspend fun deleteComment(comment: Comment) {
-        db.commentDao().delete(comment.toEntity())
+        withContext(executionContext) {
+            db.commentDao().delete(comment.toEntity())
+        }
     }
 }

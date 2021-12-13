@@ -5,23 +5,32 @@ import dev.saurabhmishra.domain.models.User
 import dev.saurabhmishra.exoplayersample.database.ExoplayerSampleDB
 import dev.saurabhmishra.exoplayersample.database.mappers.toEntity
 import dev.saurabhmishra.exoplayersample.database.mappers.toModel
+import kotlinx.coroutines.withContext
+import kotlin.coroutines.CoroutineContext
 
 class UserLocalSourceImpl(
-    private val db: ExoplayerSampleDB
+    private val db: ExoplayerSampleDB,
+    private val executionContext: CoroutineContext
 ): UserLocalSource {
 
     override suspend fun saveUsers(users: List<User>) {
-        val entities = users.map { user ->
-            user.toEntity()
+        withContext(executionContext) {
+            val entities = users.map { user ->
+                user.toEntity()
+            }
+            db.userDao().insertAll(entities)
         }
-        db.userDao().insertAll(entities)
     }
 
     override suspend fun deleteAllUsers() {
-        db.userDao().deleteAllUsers()
+        withContext(executionContext) {
+            db.userDao().deleteAllUsers()
+        }
     }
 
     override suspend fun getUserForId(id: Long): User? {
-        return db.userDao().getUserForId(id)?.toModel()
+        return withContext(executionContext) {
+            db.userDao().getUserForId(id)?.toModel()
+        }
     }
 }

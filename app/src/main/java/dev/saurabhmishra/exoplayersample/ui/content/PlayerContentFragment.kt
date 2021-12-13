@@ -3,6 +3,7 @@ package dev.saurabhmishra.exoplayersample.ui.content
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import dev.saurabhmishra.domain.models.Comment
 import dev.saurabhmishra.exoplayersample.R
 import dev.saurabhmishra.exoplayersample.base.BaseFragment
@@ -14,6 +15,7 @@ import dev.saurabhmishra.domain.Wood
 // Comments
 // Video suggestions
 // Option to add comment
+@AndroidEntryPoint
 class PlayerContentFragment : BaseFragment<PlayerContentViewModel, FragmentPlayerContentBinding>() {
 
 

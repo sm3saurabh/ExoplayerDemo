@@ -19,7 +19,7 @@ object SourceModule {
     @Provides
     @Singleton
     fun provideCommentsLocalSource(db: ExoplayerSampleDB): CommentsLocalSource {
-        return CommentsLocalSourceImpl(db)
+        return CommentsLocalSourceImpl(db, Dispatchers.IO)
     }
 
     @Provides
@@ -37,13 +37,13 @@ object SourceModule {
     @Provides
     @Singleton
     fun provideVideoLocalSource(db: ExoplayerSampleDB, sharedPreferences: SharedPreferences): VideoLocalSource {
-        return VideoLocalSourceImpl(db, sharedPreferences)
+        return VideoLocalSourceImpl(db, sharedPreferences, Dispatchers.IO)
     }
 
     @Provides
     @Singleton
     fun provideUserLocalSource(db: ExoplayerSampleDB): UserLocalSource {
-        return UserLocalSourceImpl(db)
+        return UserLocalSourceImpl(db, Dispatchers.IO)
     }
 
     @Provides

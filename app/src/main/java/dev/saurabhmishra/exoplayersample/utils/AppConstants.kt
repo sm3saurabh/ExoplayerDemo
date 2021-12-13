@@ -1,7 +1,7 @@
 package dev.saurabhmishra.exoplayersample.utils
 
 object AppConstants {
-    const val BASE_URL = "run.mocky.io"
+    const val BASE_URL = "https://run.mocky.io"
 
     object SharedPreferences {
         const val NAME = "EXO_PLAYER_SAMPLE_SP"
