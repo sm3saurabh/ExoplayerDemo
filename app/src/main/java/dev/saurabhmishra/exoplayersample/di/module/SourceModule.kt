@@ -14,6 +14,7 @@ import dev.saurabhmishra.exoplayersample.source.CommentsLocalSourceImpl
 import dev.saurabhmishra.exoplayersample.source.CommentsRemoteSourceImpl
 import dev.saurabhmishra.exoplayersample.source.VideoLocalSourceImpl
 import dev.saurabhmishra.exoplayersample.source.VideoRemoteSourceImpl
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -29,13 +30,13 @@ object SourceModule {
     @Provides
     @Singleton
     fun provideCommentsRemoteSource(api: Api): CommentsRemoteSource {
-        return CommentsRemoteSourceImpl(api)
+        return CommentsRemoteSourceImpl(api, Dispatchers.IO)
     }
 
     @Provides
     @Singleton
     fun provideVideoRemoteSource(api: Api): VideoRemoteSource {
-        return VideoRemoteSourceImpl(api)
+        return VideoRemoteSourceImpl(api, Dispatchers.IO)
     }
 
     @Provides
